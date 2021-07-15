@@ -11,6 +11,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootTest
@@ -133,6 +134,16 @@ class StudentCourseApiApplicationTests {
 		for (Course course: students ) {
 			System.out.println(course.toString());
 		}
+	}
+
+	@Test
+	void addAllData() {
+		Teacher teacher = Teacher.builder().firstName("Rachel").lastName("Green").build();
+		Student student = Student.builder().email("aaaa.amail.com").firstName("Ram").lastName("Lakshmna").build();
+		Student student1 = Student.builder().email("XXXX.amail.com").firstName("Baba").lastName("Baasha").build();
+		List<Student> students = List.of(student1,student);
+		Course course = Course.builder().students(students).teacher(teacher).title("Final").credit(5).build();
+		courseRepository.save(course);
 	}
 
 
